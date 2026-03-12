@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electrical Lock</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <script src="scripts/lightsout.js"></script>
+    <script>
+        function sendNuiMessage(message, data = {})
+        {
+            fetch(`https://${GetParentResourceName()}/${message}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            window.addEventListener("message", (event) => {
+                let data = event.data;
+                if (data.action === "elock:start") {
+                    new LightsOutGame(data.gridsize, data.tries, data.timeout)
+                        .setVolume(data.volume)
+                        .won(() => sendNuiMessage('elock:success'))
+                        .lost(() => sendNuiMessage('elock:fail'))
+                        .cellClick(() => sendNuiMessage('elock:click'))
+                        .start();
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
