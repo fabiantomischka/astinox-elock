@@ -1,5 +1,7 @@
 # About Elock
 
+[![Youtube Video](https://github.com/user-attachments/assets/a053310d-a353-43f2-99ae-4089200d7347)](https://www.youtube.com/watch?v=xAHXYcZCROc)
+
 Astinox Elock is a puzzle for FiveM servers. It is a standalone package and can be used in any framework. It has the following features:
 
 ✅ A custom "Lights Out" implementation, a grid of elements where all have to be turned on
